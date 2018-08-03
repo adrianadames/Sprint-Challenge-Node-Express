@@ -110,7 +110,7 @@ server.get('/api/projects/:id', (req, res) => {
 
 // getProjectActions():The projectModel.js helper includes an extra method called getProjectActions() that takes a project id as it's only argument and returns a list of all the actions for the project.
 
-server.get('/api/projectactions/:projectId', (req,res) => {
+server.get('/api/projects/actions/:project_id', (req,res) => {
     const {project_id} = req.params;
     dbProject.getProjectActions(project_id)
         .then(projectActions => {
@@ -123,6 +123,20 @@ server.get('/api/projectactions/:projectId', (req,res) => {
             res.status(500).json({error: "Error while retrieving project actions."})
         })
 })
+
+// server.get('/api/projectactions/:projectId', (req,res) => {
+//     const {project_id} = req.params;
+//     dbProject.getProjectActions(project_id)
+//         .then(projectActions => {
+//             if (projectActions === 0) {
+//                 return res.status(404).json({error: "No project with that ID."});
+//             }
+//             else return res.send(projectActions)
+//         })
+//         .catch(error => {
+//             res.status(500).json({error: "Error while retrieving project actions."})
+//         })
+// })
 
 
 // insert(): calling insert passing it a resource object will add it to the database and return the newly created resource.
